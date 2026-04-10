@@ -97,6 +97,9 @@ spec:
         - containerPort: {{ .EtcdListenPeerPort }}
           name: server
           protocol: TCP
+        - containerPort: 8080
+          name: metrics
+          protocol: TCP
         volumeMounts:
         - mountPath: /var/lib/etcd
           name: {{ .EtcdDataVolumeName }}
