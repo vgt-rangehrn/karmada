@@ -52,7 +52,7 @@ spec:
         - --name=$(KARMADA_ETCD_NAME)
         - --listen-client-urls=https://0.0.0.0:{{ .EtcdListenClientPort }}
         - --listen-peer-urls=http://0.0.0.0:{{ .EtcdListenPeerPort }}
-        - --listen-metrics-urls=http://0.0.0.0:8080
+        - --listen-metrics-urls=http://0.0.0.0:{{ .EtcdMetricsPort }}
         - --advertise-client-urls=https://{{ .EtcdClientService }}.{{ .Namespace }}.svc.cluster.local:{{ .EtcdListenClientPort }}
         - --initial-cluster={{ .InitialCluster }}
         - --initial-cluster-state=new
@@ -73,7 +73,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /livez
-            port: 8080
+            port: {{ .EtcdMetricsPort }}
             scheme: HTTP
           initialDelaySeconds: 15
           timeoutSeconds: 5
@@ -83,7 +83,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /readyz
-            port: 8080
+            port: {{ .EtcdMetricsPort }}
             scheme: HTTP
           initialDelaySeconds: 10
           timeoutSeconds: 5
@@ -97,7 +97,7 @@ spec:
         - containerPort: {{ .EtcdListenPeerPort }}
           name: server
           protocol: TCP
-        - containerPort: 8080
+        - containerPort: {{ .EtcdMetricsPort }}
           name: metrics
           protocol: TCP
         volumeMounts:
