@@ -41,7 +41,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /livez
-              port: 8080
+              port: 2381
               scheme: HTTP
             initialDelaySeconds: 60
             timeoutSeconds: 5
@@ -51,7 +51,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /readyz
-              port: 8080
+              port: 2381
               scheme: HTTP
             initialDelaySeconds: 10
             timeoutSeconds: 5
@@ -65,7 +65,7 @@ spec:
             - containerPort: 2380
               name: server
               protocol: TCP
-            - containerPort: 8080
+            - containerPort: 2381
               name: metrics
               protocol: TCP
           resources:
@@ -81,7 +81,7 @@ spec:
             - --listen-client-urls
             - https://0.0.0.0:2379
             - --listen-metrics-urls
-            - http://0.0.0.0:8080
+            - http://0.0.0.0:2381
             - --advertise-client-urls
             - https://etcd-client.karmada-system.svc.cluster.local:2379
             - --initial-cluster
