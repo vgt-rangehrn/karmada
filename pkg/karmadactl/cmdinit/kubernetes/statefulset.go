@@ -152,7 +152,7 @@ func (i *CommandInitOption) makeETCDStatefulSet() *appsv1.StatefulSet {
 				Scheme: corev1.URISchemeHTTP,
 			},
 		},
-		InitialDelaySeconds: 15,
+		InitialDelaySeconds: 60,
 		TimeoutSeconds:      5,
 		PeriodSeconds:       10,
 		SuccessThreshold:    1,

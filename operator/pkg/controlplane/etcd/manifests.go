@@ -75,7 +75,7 @@ spec:
             path: /livez
             port: {{ .EtcdMetricsPort }}
             scheme: HTTP
-          initialDelaySeconds: 15
+          initialDelaySeconds: 60
           timeoutSeconds: 5
           periodSeconds: 10
           successThreshold: 1
